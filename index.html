@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="./style.css">
+ 
+    <link rel="stylesheet" href="./main.js">
+</head>
+<body>
+        <nav>
+                <ul>
+                        <input id="button" type="submit" name="button" onclick="myFunction();" value="x" />
+                    <li> 
+                    <a> Home </a>
+                  </li>
+                  <li>
+                     <a> Products </a>
+                  </li>
+                  <li>
+                    <a> Contact Us </a>
+                  </li>
+                  <div id="dinamycNavBar">
+
+                  </div>
+
+                </ul>
+              </nav>
+              <div class="container">
+                  <div class="login">
+                    <h1>Login User to App</h1>
+                    <form  onsubmit="return myFunction()">
+                      <p><input type="text" name="login" value="" id="userName" placeholder="Username or Email"></p>
+                      <p><input type="password" name="password" id="userPassword" value="" placeholder="Password"></p>
+
+                      <p class="submit"><input type="submit" name="commit" value="Create"></p>
+                    </form>
+                  </div>
+
+                </div>
+</body>
+
+<script>
+function myFunction(){
+  let username = document.getElementById('userName').value;
+  let password = document.getElementById('userPassword').value;
+  // localStorage.setItem("username", username);
+  // localStorage.setItem("password", password);
+  const user = {
+    userName: username,
+    userPassword: password,
+}
+
+
+window.localStorage.setItem('user', JSON.stringify(user));
+
+window.location.reload()
+
+};   
+let user = JSON.parse(window.localStorage.getItem('user')); 
+document.getElementById("dinamycNavBar").innerHTML = ((user == null) ? 
+                  `                  
+                    <li>
+                    <a> Login </a>
+                    </li>
+                  ` 
+                  : 
+                  `
+                  <li>
+                    <a> Hello ${user.userName}</a>
+                    </li>
+
+                  `  
+                  );
+   ((user == null) ? document.getElementById("logOut").style.display = 'none' : document.getElementById("logOut").style.display = 'block');
+</script>
+</html>
